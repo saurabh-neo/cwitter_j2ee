@@ -67,9 +67,8 @@ public class CwitterController {
 			      ResultSet rs = stmt.executeQuery(sql);
 			      String uid=null;
 			      String pas=null;
-			      if(rs.isBeforeFirst())
-			      {
-			    	  while(rs.next())
+			      
+			      while(rs.next())
 			    	  {
 			    		  uid=rs.getString("userid");
 			    		  pas=rs.getString("password");
@@ -86,9 +85,9 @@ public class CwitterController {
 			    			  
 			    		  }
 			    	  }
-			      }
-					ModelAndView modelct = new ModelAndView("login");
-					modelct.addObject("error", "User not found wrong info");
+			      
+			    	  ModelAndView modelct = new ModelAndView("login");
+					modelct.addObject("error", "User not found wrong info :( ");
 					return modelct;
 		}
 		
@@ -96,18 +95,33 @@ public class CwitterController {
 		@RequestMapping(value="/signup", method = RequestMethod.POST )
 		public ModelAndView signup(@RequestParam("name")String name,@RequestParam("email")String email,@RequestParam("userid")String useridd,@RequestParam("password")String passwordd) throws SQLException,Exception
 		{
-/*		      Class.forName("com.mysql.jdbc.Driver");
+		      Class.forName("com.mysql.jdbc.Driver");
 		      conn = DriverManager.getConnection(DB_URL,USER,PASS);
 		      stmt = conn.createStatement();
 
 		      String sql;
-		      sql = "insert into ";
+		      sql = "select *from user where userid='"+useridd+"'";
 		      ResultSet rs = stmt.executeQuery(sql);
-*/
-			ModelAndView modelct = new ModelAndView("login");
-			return modelct;
+		      String uid=null;
+		    	  while(rs.next())
+		    	  {
+		    		  uid=rs.getString("userid");
+		    		  if(useridd.equals(uid)==true)
+		    		  {
+						  ModelAndView modelct = new ModelAndView("signup");
+						  modelct.addObject("error", "UserId not Available :( ");
+						  return modelct;
+		    			  
+		    		  }
+		    	  }
+
+			      sql = "insert into user(name, userid, email, password)values('"+name+"','"+email+"','"+useridd+"','"+passwordd+"')";
+			      stmt.executeUpdate(sql);
+			      
+		      ModelAndView modelct = new ModelAndView("success");
+		      	return modelct;
 	
-			}
+	}
 
 		@RequestMapping(value="/timeline", method = RequestMethod.POST )
 		public ModelAndView addCweet(@RequestParam("text")String cweet,HttpServletRequest req) throws SQLException,Exception

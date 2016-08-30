@@ -6,7 +6,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
-CWEET ADDED SUCCESSSSSSSSS
+<body style="background-color:LightGray">
+<br><br>
+<center><div align="middle"> SUCCESS :) NEW USER CREATED </div></center>
+<div>
+	<form action="/cwitter/login" method="post">
+	<center><input type="submit" name="LOGIN" value=" LOGIN ">
+	</center></form>
+</div>
 </body>
 </html>

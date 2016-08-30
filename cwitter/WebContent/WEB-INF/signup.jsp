@@ -30,7 +30,7 @@
 			<div class="row main">
 				<div class="panel-heading">
 	               <div class="panel-title text-center">
-	               		<h1 class="title"> Cwitter </h1>
+	               		<h1 class="title"><font face="Algerian"> Cwitter </font></h1>
 	               		<hr />
 	               	</div>
 	            </div> 

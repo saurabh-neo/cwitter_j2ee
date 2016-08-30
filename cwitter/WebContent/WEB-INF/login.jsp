@@ -63,7 +63,7 @@ if(login_msg!=null)
 out.println("<font color=red size=4px>"+login_msg+"</font>");
 %>
 						<div class="login-register">
-				            <a href="/cwitter/signupgo" class="btn btn-default">Don't Have Account?Sign up</a>
+				            <a href="/cwitter/signupgo" class="btn btn-default">NEW ? SIGN UP </a>
 				         </div>
 					</form>
 				</div>
