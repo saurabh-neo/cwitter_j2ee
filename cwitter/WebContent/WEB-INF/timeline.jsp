@@ -80,7 +80,7 @@
 						String url="jdbc:mysql://localhost/cwitter";
 						String username="root";
 						String password="matrix24";
-						String query="select userid,message,time from messages";
+						String query="select userid,message,time from messages ORDER BY time DESC";
 						Connection conn=DriverManager.getConnection(url,username,password);
 						Statement stmt=conn.createStatement();
 						ResultSet rs=stmt.executeQuery(query);

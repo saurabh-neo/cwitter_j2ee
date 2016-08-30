@@ -140,14 +140,6 @@ public class CwitterController {
 		      sql = "insert into messages(userid,message,time)values('"+userid+"','"+text+"','"+timedate+"')";
 		      stmt.executeUpdate(sql);
 
-		      
-			// Write database code in CweetSuccess jsp page
-			// CweetSuccess Adds cweet text in database and shows 
-			// Cweet added Successfully and creates form with goto timeline button
-			// Action in that form is same action as that of after login page
-			// to go to timline so new cweet will be shown
-			// db fields userID, cweet_text, current timestamp
-
 			ModelAndView modelct = new ModelAndView("timeline");
 			return modelct;
 		}
