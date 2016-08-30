@@ -9,10 +9,10 @@
 <body style="background-color:LightGray">
 <br><br>
 <center><div align="middle"> SUCCESS :) NEW USER CREATED </div></center>
-<div>
+<div><br>
 	<form action="/cwitter/login" method="post">
-	<center><input type="submit" name="LOGIN" value=" LOGIN ">
-	</center></form>
+	<div align="middle"><center><input type="submit" name="LOGIN" value=" LOGIN ">
+	</center></div></form>
 </div>
 </body>
 </html>
