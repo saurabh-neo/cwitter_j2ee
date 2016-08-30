@@ -1,4 +1,5 @@
-**# Cwitter - A twitter clone #**
+**### Cwitter - A twitter clone ###**
+ 
  cwitter is a clone of social website twitter which has functionality like user can sign in, log in, also user can view posts on timeline and can post on timeline.
  Cwitter is implimented using Java Framework - Spring-MVC and MySQL database
 
@@ -22,5 +23,6 @@
 
 * Run the project in eclipse using apache tomcat server
 * open web browser and in addressbar enter:
-  http://localhost:8080/cwitter/index
+
+http://localhost:8080/cwitter/index
 
