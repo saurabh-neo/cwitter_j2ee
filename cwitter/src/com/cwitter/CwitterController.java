@@ -59,7 +59,7 @@ public class CwitterController {
 			return modelct;
 		}
 		
-		@RequestMapping(value="/timeline.html", method = RequestMethod.POST )
+		@RequestMapping(value="/timeline", method = RequestMethod.POST )
 		public ModelAndView addCweet()
 		{
 			ModelAndView modelct = new ModelAndView("CweetSuccess");
