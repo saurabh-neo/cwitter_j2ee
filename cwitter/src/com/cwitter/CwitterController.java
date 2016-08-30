@@ -124,7 +124,7 @@ public class CwitterController {
 	}
 
 		@RequestMapping(value="/timeline", method = RequestMethod.POST )
-		public ModelAndView addCweet(@RequestParam("text")String cweet,HttpServletRequest req) throws SQLException,Exception
+		public ModelAndView addCweet(@RequestParam("text")String text,HttpServletRequest req) throws SQLException,Exception
 		{
 			HttpSession session=req.getSession();
 			String userid=(String)session.getAttribute("userid");
@@ -137,8 +137,8 @@ public class CwitterController {
 		      stmt = conn.createStatement();
 
 		      String sql;
-//		      sql = "insert into messages(userid,message,time)values('"+userid+"',message,'"+timedate+"')";
-	//	      ResultSet rs = stmt.executeQuery(sql);
+		      sql = "insert into messages(userid,message,time)values('"+userid+"','"+text+"','"+timedate+"')";
+		      stmt.executeUpdate(sql);
 
 		      
 			// Write database code in CweetSuccess jsp page

@@ -56,7 +56,7 @@
 								<div class="retweet">
 									<div class="icon-retweet"></div>
 								</div>
-								<form method="post" action="/addcweet">
+								<form method="post" action="/cwitter/timeline">
 									<div class="form-group">
 										<label for="comment">post cweet:</label><br>
 										<textarea class="form-control" name="text" id="text" rows="3" id="comment"></textarea>
@@ -80,7 +80,7 @@
 						String url="jdbc:mysql://localhost/cwitter";
 						String username="root";
 						String password="matrix24";
-						String query="select * from messages";
+						String query="select userid,message,time from messages";
 						Connection conn=DriverManager.getConnection(url,username,password);
 						Statement stmt=conn.createStatement();
 						ResultSet rs=stmt.executeQuery(query);
