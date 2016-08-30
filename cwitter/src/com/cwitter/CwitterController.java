@@ -55,56 +55,62 @@ public class CwitterController {
 		
 		// called when post with /login
 		@RequestMapping(value="/login", method = RequestMethod.POST )//@RequestParam("userid")String userid,@RequestParam("password")String password
-		public ModelAndView login(@RequestParam("userid")String useridd,@RequestParam("password")String passwordd,HttpSession sessionObj) throws Exception
+		public ModelAndView login(@RequestParam("userid")String useridd,@RequestParam("password")String passwordd,HttpSession sessionObj) throws SQLException,Exception
 		{
-			
 			      // Register JDBC driver and connect
 			      Class.forName("com.mysql.jdbc.Driver");
 			      conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			      stmt = conn.createStatement();
 
 			      String sql;
-			      sql = "SELECT name,userid,email,password FROM user where userid='"+useridd+"'";
+			      sql = "SELECT userid,password FROM user where userid='"+useridd+"'";
 			      ResultSet rs = stmt.executeQuery(sql);
 			      String uid=null;
 			      String pas=null;
-			      String eml=null;
-			      String name=null;
 			      if(rs.isBeforeFirst())
 			      {
 			    	  while(rs.next())
 			    	  {
-			    		  name=rs.getString(1);
-			    		  uid=rs.getString(2);
-			    		  eml=rs.getString(3);
-			    		  pas=rs.getString(4);
+			    		  uid=rs.getString("userid");
+			    		  pas=rs.getString("password");
+			    		  if(passwordd.equals(pas)==true)
+			    		  {
+			    			  // close connection
+			    			  rs.close();
+			    			  stmt.close();
+			    			  conn.close();
+			    			  // add session attribute as user will get logged in
+						      sessionObj.setAttribute("userid", uid);  
+							  ModelAndView modelct = new ModelAndView("timeline");
+							  return modelct;
+			    			  
+			    		  }
 			    	  }
 			      }
-			      
-			      sessionObj.setAttribute("userid", uid);  
-				ModelAndView modelct = new ModelAndView("timeline");
+					ModelAndView modelct = new ModelAndView("login");
+					modelct.addObject("error", "User not found wrong info");
 					return modelct;
-
 		}
 		
 		
 		@RequestMapping(value="/signup", method = RequestMethod.POST )
 		public ModelAndView signup(@RequestParam("name")String name,@RequestParam("email")String email,@RequestParam("userid")String useridd,@RequestParam("password")String passwordd) throws SQLException,Exception
 		{
-		      Class.forName("com.mysql.jdbc.Driver");
+/*		      Class.forName("com.mysql.jdbc.Driver");
 		      conn = DriverManager.getConnection(DB_URL,USER,PASS);
 		      stmt = conn.createStatement();
 
 		      String sql;
 		      sql = "insert into ";
 		      ResultSet rs = stmt.executeQuery(sql);
-
+*/
 			ModelAndView modelct = new ModelAndView("login");
 			return modelct;
-		}
+	
+			}
 
 		@RequestMapping(value="/timeline", method = RequestMethod.POST )
-		public ModelAndView addCweet(@RequestParam("text")String cweet,HttpServletRequest req)
+		public ModelAndView addCweet(@RequestParam("text")String cweet,HttpServletRequest req) throws SQLException,Exception
 		{
 			HttpSession session=req.getSession();
 			String userid=(String)session.getAttribute("userid");
@@ -112,7 +118,15 @@ public class CwitterController {
 			Date date= new Date();
 	        String timedate=(new Timestamp(date.getTime())).toString();
 	        
-	        
+		      Class.forName("com.mysql.jdbc.Driver");
+		      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+		      stmt = conn.createStatement();
+
+		      String sql;
+//		      sql = "insert into messages(userid,message,time)values('"+userid+"',message,'"+timedate+"')";
+	//	      ResultSet rs = stmt.executeQuery(sql);
+
+		      
 			// Write database code in CweetSuccess jsp page
 			// CweetSuccess Adds cweet text in database and shows 
 			// Cweet added Successfully and creates form with goto timeline button
@@ -139,12 +153,6 @@ public class CwitterController {
 			return modelct;
 		}
 		
-		@RequestMapping(value="/timeline", method = RequestMethod.GET )
-		public ModelAndView addCweet()
-		{
-			ModelAndView modelct = new ModelAndView("timeline");
-			return modelct;
-		}
 
 		@RequestMapping(value="/logout", method = RequestMethod.POST )
 		public ModelAndView login(HttpSession session, Model model)
