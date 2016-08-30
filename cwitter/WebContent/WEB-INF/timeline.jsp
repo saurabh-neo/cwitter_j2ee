@@ -37,8 +37,10 @@
 	
 	<body>
 		<div>
-			
+
 				<span class="first"> 
+							<div align="left"><form action="/cwitter/logout" method="post">
+			<input type="submit" class="btn btn-info" value="logout"></form></div>
 					@Cwitter
 					<span class="icon-edit new"></span>
 				</span>

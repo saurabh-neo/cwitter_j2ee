@@ -163,8 +163,11 @@ public class CwitterController {
 		@RequestMapping(value="/logout", method = RequestMethod.POST )
 		public ModelAndView login(HttpSession session, Model model)
 		{
-			ModelAndView models = new ModelAndView("login");
-			return models;
+			  session.invalidate();
+			  if(model.containsAttribute("userid")) model.asMap().remove("userid");
+			  
+			  ModelAndView modelct = new ModelAndView("login");
+			  return modelct;
 		}
 
 
